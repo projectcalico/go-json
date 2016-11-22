@@ -971,10 +971,10 @@ func (d *decodeState) literalStore(item []byte, v reflect.Value, fromQuoted bool
 		}
 		switch v.Kind() {
 		default:
-			d.saveError(&UnmarshalTypeError{Value: "string", Type: v.Type(), Offset: int64(d.off), Data: s})
+			d.saveError(&UnmarshalTypeError{Value: "string", Type: v.Type(), Offset: int64(d.off), Data: string(s)})
 		case reflect.Slice:
 			if v.Type().Elem().Kind() != reflect.Uint8 {
-				d.saveError(&UnmarshalTypeError{Value: "string", Type: v.Type(), Offset: int64(d.off), Data: s})
+				d.saveError(&UnmarshalTypeError{Value: "string", Type: v.Type(), Offset: int64(d.off), Data: string(s)})
 				break
 			}
 			b := make([]byte, base64.StdEncoding.DecodedLen(len(s)))
@@ -990,7 +990,7 @@ func (d *decodeState) literalStore(item []byte, v reflect.Value, fromQuoted bool
 			if v.NumMethod() == 0 {
 				v.Set(reflect.ValueOf(string(s)))
 			} else {
-				d.saveError(&UnmarshalTypeError{Value: "string", Type: v.Type(), Offset: int64(d.off), Data: s})
+				d.saveError(&UnmarshalTypeError{Value: "string", Type: v.Type(), Offset: int64(d.off), Data: string(s)})
 			}
 		}
 
