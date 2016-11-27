@@ -1,3 +1,5 @@
+[![Build Status](https://semaphoreci.com/api/v1/calico/go-json/branches/calico/badge.svg)](https://semaphoreci.com/calico/go-json)
+
 # go-json
 
 A "fork" of the golang encoding/json module.  Rather than forking the entire
